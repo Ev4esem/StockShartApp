@@ -4,9 +4,6 @@ import android.os.Parcelable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import com.example.stockshartapp.data.Bar
 import kotlinx.parcelize.Parcelize
@@ -26,7 +23,7 @@ data class StockChartUiState(
     private val visibleBars: List<Bar>
         get() {
             val startIndex = (scrolledBy / barWidth).roundToInt().coerceAtLeast(0)
-            val endIndex = startIndex + visibleBarsCount.coerceAtMost(barList.size)
+            val endIndex = (startIndex + visibleBarsCount).coerceAtMost(barList.size)
             return barList.subList(startIndex, endIndex)
         }
     val max: Float
